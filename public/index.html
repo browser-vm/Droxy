@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="Droxy"
+      content="This is a proxy build on Chemical.js, a web component library."
+    />
+    <title>Droxy 0.0.1</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/chemical.js"></script>
+    <script src="/chemical.components.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Droxy 0.0.1</h1>
+    </header>
+    <main>
+      <input
+        autofocus
+        spellcheck="false"
+        autocomplete="off"
+        id="search"
+        data-frame="web"
+        data-auto-https
+        data-search-engine="https://www.google.com/search?q=%s"
+        placeholder="Search or Enter a URL"
+        is="chemical-input"
+      />
+    </main>
+    <section id="controls" is="chemical-controls">
+      <button onclick="chemical.componentAction('back', 'web')">Back</button>
+      <button onclick="chemical.componentAction('forward', 'web')">
+        Forward
+      </button>
+      <button onclick="chemical.componentAction('reload', 'web')">
+        Reload
+      </button>
+      <button onclick="chemical.componentAction('close', 'web')">Close</button>
+    </section>
+    <iframe id="web" data-controls="controls" is="chemical-iframe"></iframe>
+  </body>
+</html>
