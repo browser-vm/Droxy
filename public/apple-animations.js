@@ -29,6 +29,29 @@ document.addEventListener('DOMContentLoaded', function() {
   const loadingMessage = document.getElementById('loadingMessage');
   const searchInput = document.getElementById('search');
   
+  // Force hide the loading overlay in case it's stuck (emergency fallback)
+  window.removeLoadingOverlay = function() {
+    if (loadingOverlay) {
+      loadingOverlay.classList.add('hidden');
+      console.log('Loading overlay forcibly removed');
+      clearInterval(loadingInterval);
+    }
+  };
+  
+  // Add a force-hide button just in case (will be hidden automatically)
+  const forceHideButton = document.createElement('button');
+  forceHideButton.innerText = "Click to continue";
+  forceHideButton.style.marginTop = "20px";
+  forceHideButton.style.padding = "8px 16px";
+  forceHideButton.style.borderRadius = "8px";
+  forceHideButton.style.backgroundColor = "#0071e3";
+  forceHideButton.style.color = "white";
+  forceHideButton.style.border = "none";
+  forceHideButton.style.cursor = "pointer";
+  forceHideButton.onclick = window.removeLoadingOverlay;
+  
+  loadingOverlay.appendChild(forceHideButton);
+  
   // Set random loading message every 2 seconds
   let currentMsgIndex = -1;
   
@@ -55,7 +78,10 @@ document.addEventListener('DOMContentLoaded', function() {
   let loadingInterval = setInterval(setRandomLoadingMessage, 2000);
   setRandomLoadingMessage(); // Set initial message
   
-  // Simulate loading (3 seconds for demo purposes)
+  // Safety timeout to ensure overlay is eventually removed
+  setTimeout(window.removeLoadingOverlay, 6000);
+  
+  // Normal loading timeout
   setTimeout(() => {
     clearInterval(loadingInterval);
     loadingOverlay.classList.add('hidden');
