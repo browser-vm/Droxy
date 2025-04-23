@@ -89,8 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Normal loading timeout
   setTimeout(() => {
-    clearInterval(loadingInterval);
-    loadingOverlay.classList.add('hidden');
+    window.removeLoadingOverlay(); // Use the same reliable function for auto-hiding
     
     // Debug log to verify loading messages were changing
     console.log('Loading complete - Messages were cycling through:', currentMsgIndex);
