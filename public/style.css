@@ -58,6 +58,8 @@ body {
 .loading-overlay.hidden {
   opacity: 0;
   pointer-events: none;
+  visibility: hidden; /* Ensure it's completely gone */
+  z-index: -1; /* Move behind everything else */
 }
 
 .loading-spinner {
