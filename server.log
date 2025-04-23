@@ -1,1 +1,25 @@
-Fancy example listening on port 3000
+About to throw: listen EADDRINUSE: address already in use :::3000
+/app/node_modules/rammerhead/src/util/addMoreErrorGuards.js:35
+        throw err;
+        ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at listen (file:///app/node_modules/chemicaljs/dist/index.js:176:17)
+    at file:///app/index.js:14:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v20.19.0
