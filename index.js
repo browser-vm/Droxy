@@ -12,5 +12,5 @@ app.use(express.static("public", {
 app.serveChemical();
 
 listen(port, () => {
-    console.log(`Fancy example listening on port ${port}`);
+    console.log(`Droxy listening on port ${port}`);
 });
