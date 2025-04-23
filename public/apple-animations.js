@@ -35,6 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
       loadingOverlay.classList.add('hidden');
       console.log('Loading overlay forcibly removed');
       clearInterval(loadingInterval);
+      
+      // Double check with a slight delay to ensure it's removed
+      setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+        console.log('Loading overlay display set to none');
+      }, 600);
     }
   };
   
