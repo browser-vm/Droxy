@@ -30,15 +30,25 @@ document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('search');
   
   // Set random loading message every 2 seconds
+  let currentMsgIndex = -1;
+  
   function setRandomLoadingMessage() {
-    const randomIndex = Math.floor(Math.random() * funnyLoadingMessages.length);
-    loadingMessage.textContent = funnyLoadingMessages[randomIndex];
+    // Make sure we don't show the same message twice in a row
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * funnyLoadingMessages.length);
+    } while (randomIndex === currentMsgIndex);
     
-    // Add fade effect
+    currentMsgIndex = randomIndex;
+    
+    // Fade out current message
     loadingMessage.style.opacity = 0;
+    
+    // Change text and fade in after a short delay
     setTimeout(() => {
+      loadingMessage.textContent = funnyLoadingMessages[currentMsgIndex];
       loadingMessage.style.opacity = 1;
-    }, 200);
+    }, 300);
   }
 
   // Initialize loading behavior
@@ -49,7 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(() => {
     clearInterval(loadingInterval);
     loadingOverlay.classList.add('hidden');
-  }, 3000);
+    
+    // Debug log to verify loading messages were changing
+    console.log('Loading complete - Messages were cycling through:', currentMsgIndex);
+  }, 4000); // Extended to 4 seconds to see more loading messages
   
   // Handle iframe loading
   const webFrame = document.getElementById('web');
@@ -57,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Listen for navigation in the iframe
   searchInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
+      // Show loading overlay
       loadingOverlay.classList.remove('hidden');
       loadingInterval = setInterval(setRandomLoadingMessage, 2000);
       setRandomLoadingMessage();
@@ -73,9 +87,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Add hover effects to buttons
   const buttons = document.querySelectorAll('.control-button');
-  buttons.forEach(button => {
+  console.log('Found control buttons:', buttons.length); // Debug log
+  
+  buttons.forEach((button, index) => {
+    // Debug log to verify button registration
+    console.log('Registered button:', index);
+    
     button.addEventListener('mouseenter', () => {
       button.style.transform = 'translateY(-2px)';
+      console.log('Button hover:', index); // Debug hover
     });
     
     button.addEventListener('mouseleave', () => {
@@ -116,4 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Apply random animations periodically
   setInterval(applyRandomAnimation, 10000);
+  
+  // Log to verify script loaded
+  console.log('Apple animations loaded');
 });

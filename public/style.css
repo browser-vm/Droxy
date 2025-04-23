@@ -50,7 +50,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2000; /* Increased z-index to be on top of everything */
   opacity: 1;
   transition: opacity 0.5s ease;
 }
@@ -173,7 +173,7 @@ main {
   background-color: var(--apple-card-bg);
   backdrop-filter: blur(var(--apple-blur));
   -webkit-backdrop-filter: blur(var(--apple-blur));
-  z-index: 100;
+  z-index: 100; /* Lower than loading overlay */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   animation: slideDown 0.5s ease;
 }
@@ -191,6 +191,8 @@ main {
   cursor: pointer;
   transition: var(--apple-transition);
   padding: 0.5rem;
+  position: relative; /* Ensure proper stacking */
+  z-index: 150; /* Higher than controls container, lower than loading overlay */
 }
 
 .control-button:hover {
@@ -220,6 +222,7 @@ main {
   background: var(--apple-background);
   transition: opacity 0.3s ease;
   box-shadow: var(--apple-shadow);
+  z-index: 50; /* Lower than controls */
 }
 
 /* Animations */
